@@ -1,0 +1,82 @@
+<html>
+<head>
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <style>
+    body{
+      background-color: #CEF0F1;
+    }
+    .clicked {
+      text-decoration: line-through;
+      color: #bbbbbb;
+    }
+    h1{
+      margin-top: 40px;
+      text-align: center;
+    }
+    #div {
+      text-align: center;
+    }
+    p{
+      text-align: center;
+      cursor: pointer;
+    }
+
+    /*button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+}*/
+
+  </style>
+</head>
+<body>
+  <h1>Shopping list</h1>
+  <div id="div">
+  <input class="form-control" type='text' id="input"/>
+  <button class="btn btn-info" id="button">Add Item</button>
+</div>
+  <div id="section">
+  </div>
+
+  <script>
+  var options = [{id: 'a', name: 'Milk'},{id: 'b', name: 'Sugar'},{id: 'c', name: 'Flour'},{id: 'd', name: 'Coffee'},]
+  function click (id){
+    console.log(id)
+    document.getElementById(id).className = "clicked";
+  }
+  function render() {
+    var htmlText = ''
+    for (var i = 0; i < options.length; i++) {
+      htmlText += ('<p id="' + options[i].id + '">' + options[i].name + '</p>')
+    }
+    document.getElementById('section').innerHTML = htmlText
+
+    for (var j = 0; j < options.length; j++) {
+      document.getElementById(options[j].id).addEventListener('click', click.bind(null, options[j].id))
+    }
+  }
+  function addItem() {
+    var val = document.getElementById('input')
+    options.push({id: val.value, name: val.value})
+    val.value = ''
+    render()
+  }
+  document.getElementById('button').addEventListener('click', addItem)
+  render()
+  </script>
+</body>
+</html>
